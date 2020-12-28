@@ -29,10 +29,9 @@ namespace DotNetDebugging
 
     class Program
     {
-        static void StudyChinese(string content)
-        {
-            Console.WriteLine($"I have learnt {content}");
-        }
+        public static int? Id { get; set; }
+        static void StudyChinese(string content) => Console.WriteLine($"I have learnt {content}");
+
         static void DeleteFile(string filePath)
         {
             Directory.Delete(filePath, true);
@@ -47,14 +46,16 @@ namespace DotNetDebugging
             string filePath = @"F:\MyCode\C#\HelloWorld";
             DeleteFile(filePath);
             */
-            string baidu = "www.baidu.com";
-            string url = "<a href ='" + baidu + "'></a>";
-            Person person = new Person("Bruce", "male");
-            
-            Func<int,int,int> func = new Func<int,int,int> ((a,b)=>{return a+b;});
-            int result = func(100,200);
-            Console.WriteLine(result);
+            if (Id == null)
+            {
+                Console.WriteLine("Id==null");
+            }
+            else
+            {
+                Console.WriteLine("Id!=null");
+            }
         }
+        /*
         static int Fibonacci(int n)
         {
             Debug.WriteLine($"Entering {nameof(Fibonacci)} method");
@@ -71,5 +72,6 @@ namespace DotNetDebugging
             }
             return n == 0 ? n1 : n2;
         }
+        */
     }
 }
