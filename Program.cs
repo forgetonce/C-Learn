@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace DotNetDebugging
 {
-    public delegate void Study(string content);
+    delegate int[] Sort(int[] targetArray,int leftOffset,int rightOffset);
     class Person
     {
         private string name;
@@ -29,15 +29,48 @@ namespace DotNetDebugging
 
     class Program
     {
-        public static int? Id { get; set; }
-        static void StudyChinese(string content) => Console.WriteLine($"I have learnt {content}");
-
-        static void DeleteFile(string filePath)
+        static void QuickSortAsc(int[] targetArray,int leftOffset,int rightOffset)
         {
-            Directory.Delete(filePath, true);
+            int swapLocation = 0;
+            int i = leftOffset;
+            int j = rightOffset;
+            if(leftOffset>rightOffset)
+                return;
+            else
+            {
+                int tempBase = targetArray[leftOffset];//临时基准值
+                while(i!=j)
+                {
+                    while(targetArray[j]>=tempBase&&j>i)
+                    {
+                        j--;
+                    }
+                    while(targetArray[i]<=tempBase&&i<j)
+                    {
+                        i++;
+                    }
+                    
+                    if(i<j)
+                    {
+                        swapLocation = targetArray[i];
+                        targetArray[i] = targetArray[j];
+                        targetArray[j] = swapLocation;
+                    }
+                }
+                targetArray[leftOffset]=targetArray[i];
+                targetArray[i] = tempBase;
+
+                QuickSortAsc(targetArray,leftOffset,i-1);
+                QuickSortAsc(targetArray,i+1,rightOffset);
+            }
         }
         static void Main(string[] args)
         {
+            int[] targetArray = new int[]{6,1,2,7,9,3,4,5,10,8};
+            
+            QuickSortAsc(targetArray,0,targetArray.Length-1);
+            Console.WriteLine();
+            foreach (int item in targetArray) Console.Write(item.ToString());
             /*
             int result = Fibonacci (5);
             Console.WriteLine (result);
@@ -46,14 +79,6 @@ namespace DotNetDebugging
             string filePath = @"F:\MyCode\C#\HelloWorld";
             DeleteFile(filePath);
             */
-            if (Id == null)
-            {
-                Console.WriteLine("Id==null");
-            }
-            else
-            {
-                Console.WriteLine("Id!=null");
-            }
         }
         /*
         static int Fibonacci(int n)
