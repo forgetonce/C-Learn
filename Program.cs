@@ -8,17 +8,17 @@ namespace DotNetDebugging
     delegate int[] Sort(int[] targetArray,int leftOffset,int rightOffset);
     class Person
     {
-        private string name;
-        private string sex;
+        private string _name;
+        private string _sex;
         public string Name
         {
-            get => name;
-            set => name = value;
+            get => _name;
+            set => _name = value;
         }
         public string Sex
         {
-            get => sex;
-            set => sex = value;
+            get => _sex;
+            set => _sex = value;
         }
         public Person(string name, string sex)
         {
